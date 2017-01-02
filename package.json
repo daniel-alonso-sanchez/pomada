@@ -1,0 +1,24 @@
+{
+  "name": "pomada",
+  "version": "1.0.0",
+  "description": "Rest API for creating async ansible jobs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ansible",
+    "rest",
+    "express",
+    "swagger",
+    "bull",
+    "nodejs"
+  ],
+  "dependencies": {
+    "bull": "^2.0.0",
+    "config": "^1.24.0"
+  },
+  "author": "alonsosanchezd@yahoo.com",
+  "license": "ISC"
+}
