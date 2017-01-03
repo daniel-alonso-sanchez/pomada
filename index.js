@@ -1,9 +1,6 @@
-/**
-var kueService=require('./services/queue/bullService')
-kueService.createJob({
-  title: 'ola ke ase',play: 'site.yml' , role: 'utils'
-});
-**/
+
+var kueService=require('./services/queue/bullService');
+
 var config = require('config');
 var dbConfig = config.get('redis');
 var matador = require('bull-ui/app')({
