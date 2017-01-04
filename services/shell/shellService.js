@@ -1,9 +1,12 @@
 var spawn = require('child_process').spawn;
-function runCommand(data,doneCallback){
+var StringDecoder = require('string_decoder').StringDecoder;
+function runCommand(job,doneCallback){
   var child = spawn('node', ['-v'],{shell:true });
+  var decoder = new StringDecoder('utf8');
   child.stdout.on('data', function(chunk) {
     // output will be here in chunks
-    console.log ("data:"+chunk);
+    var textChunk = decoder.write(chunk);
+	job.log (textChunk);
   });
   child.on('close', (code) => {
     console.log(`child process exited with code ${code}`);

@@ -10,14 +10,24 @@ kue.app.listen(app.port);
 console.log("kue rest api is listening on port "+ app.port);
 
 ansibleQueue.process('ansible',function(job, done){
-console.log ("job:"+JSON.stringify(job));
-  runProvision(job.data, done);
+	  /**
+	  better job handline
+	  **/
+	  var domain = require('domain').create();
+	  domain.on('error', function(err){
+		done(err);
+	  });
+	  domain.run(function(){ // your process function		
+		runProvision(job, done);
+		//throw new Error( 'bad things happen' );
+		//done();
+	  });
+
 });
 
-function runProvision(data, done) {
+function runProvision(job, done) {
   
-  shellService.run(data,done);
-  done();
+  shellService.run(job,done); 
 }
 
 function createJob(data){
