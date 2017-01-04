@@ -4,6 +4,15 @@ var bullModel = require('../models/bull');
 var redisModel = require('../models/redis');
 
 module.exports = function (app) {
+	/**
+	 * @api {get} /api/jobs/pending/status/:type Request pending jobs by status type
+	 * @apiName getPendingJobsByStatusType
+	 * @apiGroup Pending	 
+	 * @apiParam {String='active', 'complete', 'failed', 'wait', 'delayed'} status type
+	 * @apiVersion 1.0.0
+	 * @apiSuccess {Boolean} success tells if request was successfull or not
+	 * @apiSuccess {String} message detailed message
+	 */
     app.get('/api/jobs/pending/status/:type', function (req, res) {
         var type = req.params['type'];
         redisModel.makePendingByType(type).done(function(results){
