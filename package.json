@@ -16,18 +16,18 @@
     "nodejs"
   ],
   "dependencies": {
+    "bluebird": "^2.9.24",
+    "body-parser": "^1.13.3",
     "bull": "^2.0.0",
     "config": "^1.24.0",
-	"bluebird": "^2.9.24",
-    "body-parser": "^1.13.3",    
     "consolidate": "~0.10.0",
     "dustjs-linkedin": "~2.5.1",
     "express": "^4.13.4",
     "less": "~2.1.2",
     "lodash": "~2.4.1",
     "q": "~1.1.2",
-    "redis": "^2.5.3"
+    "redis": "^2.5.3"   
   },
   "author": "alonsosanchezd@yahoo.com",
-  "license": "ISC"  
+  "license": "ISC"
 }
