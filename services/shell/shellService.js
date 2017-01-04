@@ -1,7 +1,7 @@
 var spawn = require('child_process').spawn;
 var StringDecoder = require('string_decoder').StringDecoder;
 function runCommand(job,doneCallback){
-  var child = spawn('ansible-playbook', ['-i','windows',job.data.rule, '--tags',job.data.tags ],{cwd: "/datos/ansible/ansible-data/window_playbooks" }, {stdio: "inherit"});
+  var child = spawn('ansible-playbook', ['-i',job.data.to,job.data.rule, '--tags',job.data.tags ],{cwd: "/datos/ansible/ansible-data/window_playbooks" }, {stdio: "inherit"});
   var decoder = new StringDecoder('utf8');
   child.stdout.on('data', function(chunk) {
     // output will be here in chunks
