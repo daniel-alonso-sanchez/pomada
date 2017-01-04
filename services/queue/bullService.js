@@ -17,7 +17,8 @@ ansibleQueue.process('ansible',function(job, done){
 	  domain.on('error', function(err){
 		done(err);
 	  });
-	  domain.run(function(){ // your process function		
+	  domain.run(function(){ // your process function	
+		console.log("processing job "+job.id);
 		runProvision(job, done);
 		//throw new Error( 'bad things happen' );
 		//done();

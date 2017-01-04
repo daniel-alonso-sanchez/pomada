@@ -1,7 +1,6 @@
 var spawn = require('child_process').spawn;
 var StringDecoder = require('string_decoder').StringDecoder;
 function runCommand(job,doneCallback){
-cwd 
   var child = spawn('ansible-playbook', ['-i','windows',job.data.rule, '--tags','"'+job.data.tags+'"' ],{shell:true,cwd: "/datos/ansible/ansible-data/window_playbooks" });
   var decoder = new StringDecoder('utf8');
   child.stdout.on('data', function(chunk) {
