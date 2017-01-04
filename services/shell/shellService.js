@@ -15,7 +15,7 @@ function runCommand(job,doneCallback){
   child.on('close', function (code) {
 	console.log('child process exited with code ' + code);
 	if (code!==0){
-		throw new Error( 'job ends with code: ' code );
+		throw new Error( 'job ends with code: '+ code );
 	}
 	doneCallback();
   });
