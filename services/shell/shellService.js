@@ -8,7 +8,7 @@ function runCommand(job,doneCallback){
     var textChunk = decoder.write(chunk);
 	job.log (textChunk);
   });
-  child.stderr.on('data', function (data) {
+  child.stderr.on('data', function (chunk) {
 	  var textChunk = decoder.write(chunk);
 	  job.log (textChunk);
   });
