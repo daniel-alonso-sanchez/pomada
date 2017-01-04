@@ -1,15 +1,6 @@
+var config = require('config').get('app'),
+  app = require('./app')(config);
 
-var kueService=require('./services/queue/bullService');
-
-var config = require('config');
-var dbConfig = config.get('redis');
-var matador = require('bull-ui/app')({
-  redis: {
-    host: dbConfig.host,
-    port: dbConfig.port
-  }
+app.listen(config.port, function() {
+  console.log("Matador listening on port", config.port, "in", process.env.NODE_ENV, "mode");
 });
-  matador.listen(1337, function(){
-    console.log('bull-ui started listening on port', this.address().port);
-  });
-

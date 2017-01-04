@@ -1,7 +1,7 @@
 var Queue = require('bull');
 var config = require('config');
-var dbConfig = config.get('redis');
-var ansibleQueue = Queue('ansible', dbConfig.port, dbConfig.host);
+var app = config.get('app');
+var ansibleQueue = Queue('ansible', app.redis.port, app.redis.host);
 
 
 ansibleQueue.process(function(job, done){
