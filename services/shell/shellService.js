@@ -8,10 +8,18 @@ function runCommand(job,doneCallback){
     var textChunk = decoder.write(chunk);
 	job.log (textChunk);
   });
-  child.on('close', (code) => {
-    console.log('child process exited with code ${code}');
-    doneCallback();
+  child.stderr.on('data', function (data) {
+	  var textChunk = decoder.write(chunk);
+	  job.log (textChunk);
   });
+  child.on('close', function (code) {
+	console.log('child process exited with code ' + code);
+	if (code!==0){
+		throw new Error( 'job ends with code: ' code );
+	}
+	doneCallback();
+  });
+  
   // or if you want to send output elsewhere
   //child.stdout.pipe(dest);
 };
