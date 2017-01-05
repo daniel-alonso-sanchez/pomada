@@ -6,9 +6,12 @@
 		"url": "redis://10.19.24.163:6379"
 	},
 	"log":{
-	  "level": "error",
+	  "level": "debug",
       "colorize": true,
       "label": "app"
+	},
+	"playbook":{
+		"path": "/datos/ansible/ansible-data/window_playbooks" 
 	}
 	
   }

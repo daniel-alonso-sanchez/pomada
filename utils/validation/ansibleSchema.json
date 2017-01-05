@@ -21,10 +21,7 @@
   },
   "required": [
 	"title",
-	"to",
-	"rule",
-	"tags",
-	"atts"
+	"to"	
   ],
 "definitions": {
         "atts": {
