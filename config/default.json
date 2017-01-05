@@ -4,6 +4,12 @@
     "port":"1337",
 	"redis": {
 		"url": "redis://10.19.24.163:6379"
+	},
+	"log":{
+	  "level": "error",
+      "colorize": true,
+      "label": "app"
 	}
+	
   }
 }

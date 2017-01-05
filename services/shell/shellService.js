@@ -1,3 +1,4 @@
+var logger = require.main.require('./utils/logs/logger');
 var spawn = require('child_process').spawn;
 var StringDecoder = require('string_decoder').StringDecoder;
 function runCommand(job,doneCallback){
@@ -9,12 +10,13 @@ function runCommand(job,doneCallback){
         job.log (textChunk);
   });
   child.stderr.on('data', function (chunk) {
-          var textChunk = decoder.write(chunk);
+          var textChunk = decoder.write(chunk);		 
           job.log (textChunk);
   });
   child.on('close', function (code) {
         console.log('child process exited with code ' + code);
         if (code!==0){
+				logger.debug('Job %d exited with code %d. Details: %s', job.id, code, JSON.stringify(job));
                 throw new Error( 'job ends with code: '+ code );
         }
         doneCallback();
