@@ -1,5 +1,5 @@
 var validator = require('is-my-json-valid');
-var logger = require.main.require('./utils/logs/logger');
+var logger = require('utils/logs/logger');
 var ansibleSchema=require('./ansibleSchema.json');
 var validate = validator(ansibleSchema);
 

@@ -1,8 +1,8 @@
-var shellService = require('../shell/shellService');
+var shellService = require('services/shell/shellService');
 var config = require('config');
-var logger = require.main.require('./utils/logs/logger');
+var logger = require('utils/logs/logger');
 var app = config.get('app');
-var validation= require('../../utils/validation/jschemaValidation');
+var validation= require('utils/validation/jschemaValidation');
 var kue = require('kue'), 
 ansibleQueue = kue.createQueue({
   redis: app.redis.url

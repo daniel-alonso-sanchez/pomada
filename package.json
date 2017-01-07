@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "npm run test-unit",
-	"test-unit": "set NODE_ENV=test && mocha --recursive --require co-mocha"
+    "test-unit": "set NODE_ENV=test && mocha --recursive --require co-mocha"
   },
   "keywords": [
     "ansible",
@@ -22,8 +22,9 @@
     "mocha": "2.5.3",
     "sinon": "1.17.4",
     "sinon-chai": "2.8.0"
- },
+  },
   "dependencies": {
+    "app-module-path": "^2.2.0",
     "colors": "^1.1.2",
     "config": "^1.24.0",
     "figlet": "^1.2.0",

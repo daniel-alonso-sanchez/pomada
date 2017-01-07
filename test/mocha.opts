@@ -1,0 +1,2 @@
+--require app/test/bootstrap.js
+--recursive

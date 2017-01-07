@@ -1,4 +1,4 @@
-var logger = require.main.require('./utils/logs/logger');
+var logger = require('utils/logs/logger');
 var spawn = require('child_process').spawn;
 var config= require ('config');
 var StringDecoder = require('string_decoder').StringDecoder;

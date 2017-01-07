@@ -1,4 +1,5 @@
-var service = require('./services/queue/bullService');
+require('app-module-path').addPath(__dirname+'/app');
+var service = require('services/queue/bullService');
 var figlet = require('figlet');
 var colors = require('colors');
 var appPackage = require('./package.json');
