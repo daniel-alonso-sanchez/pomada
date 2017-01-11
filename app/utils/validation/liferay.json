@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "liferay_base_dir": {
+      "type": "string",
+      "default": "C:\\tools\\desa\\liferay"
+    },
+    "role_sources_base_dir": {
+      "type": "string",
+      "default": "{{sources_base_dir}}/liferay"
+    },
+    "liferay_home_dir_name": {
+      "type": "string",
+      "default": "liferay-portal-{{ liferay_version }}"
+    },
+    "liferay_home_dir": {
+      "type": "string",
+      "default": "{{liferay_base_dir}}\\{{ liferay_home_dir_name }}"
+    },
+    "liferay_version": {
+	  "enum": [ "6.2.4-ce-ga5", "7.0.2-ce-ga3" ]     
+    },
+    "liferay_tomcat_dir": {
+      "type": "string",
+      "default": "{{liferay_home_dir}}/tomcat-{{ liferay_bundle_tomcat_version }}"
+    }
+  },
+  "required": [ 
+    "liferay_version"    
+  ]
+}

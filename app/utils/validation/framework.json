@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "role_sources_base_dir": {
+      "type": "string",
+      "default": "{{sources_base_dir}}/framework"
+    },
+    "is_flex": {
+      "type": "boolean",
+      "default": false
+    },
+    "framework_version": {
+      "type": "string",
+      "default": "4"
+    }
+  },
+  "required": [
+    "is_flex",       
+    "framework_version"
+  ]
+}

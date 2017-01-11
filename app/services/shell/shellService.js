@@ -66,30 +66,58 @@ function getParameters(job){
 	return parameters;
 }
 function getExtraVars(job){
+	logger.debug('getExtraVars...');
 	var parameters=[];
 	var hasProperty=has(job.data, 'tags');
-	var extraVarsStr='';
+	var varsObject={};
 	if (hasProperty && job.data.tags.length>0){		
 		var tags=job.data.tags.split(',');
 		for (i=0;i<tags.length;i++){
 			var currentTag=tags[i];
-			var currentVarsStr=getExtraVarsForTag(job,currentTag);
+			var currentVarObject=getExtraVarsForTag(job,currentTag);
+			if (currentVarObject!=null){
+				logger.debug('getExtraVars: %s',JSON.stringify(currentVarObject));
+				copyProperties(currentVarObject,varsObject);
+			}
 		}
-	}   
+	}
+	return serializeExtraVars(varsObject);
+}
+function serializeExtraVars (varsObject){
+	var stringified=varsToString(varsObject);
+	var parameters=[];
+	if (stringified.length>0){
+		parameters=['--extra-vars',"'"+stringified+"'"];
+	}
+	logger.debug('serializeExtraVars...'+parameters);
+	return parameters;
+}
+function varsToString (varsObject){
+	return JSON.stringify(varsObject);
+}
+function copyProperties (from,to){
+	for(var k in from){
+		to[k]=from[k];
+	}
 }
 function getExtraVarsForTag(job,tag){	
+	logger.debug('getExtraVarsForTag...');
 	var hasProperty=has(job.data, 'vars');
-	var extraVarsStr='';
-	if (hasProperty && job.data.vars.length>0){		
+	var result=null;		
+	if (hasProperty){		
 		hasProperty=has(job.data.vars, tag);
-		if (hasProperty && job.data.vars[tag].length>0){		
+		logger.debug('getExtraVarsForTag. Has property tag %s ? '+hasProperty,tag);
+		if (hasProperty){		
 			/**ahora es cuando validamos el esquema de los datos suministrados**/
 			validateMetadata(job,tag);
+			result =job.data.vars[tag];
+			logger.debug('getExtraVarsForTag. Result: %s  ',JSON.stringify(result));
 		}   
-	}   
+	}  
+	return result;
 }
 function validateMetadata(job,tag) {
-
+  
  if (!validation.validate(job.data.vars[tag],tag)){
     logger.error ('Job %d json metadata is not valid. Must match this json schema: %s',job.id,JSON.stringify(validation.getSchema(tag)));
     throw new Error( 'Json request is not valid. Must match this json schema: '+JSON.stringify(validation.getSchema(tag)) );

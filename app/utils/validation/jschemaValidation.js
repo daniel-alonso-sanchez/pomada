@@ -1,12 +1,16 @@
 var validator = require('is-my-json-valid');
 var logger = require('utils/logs/logger');
-var ansibleSchema=require('./ansibleSchema.json');
+
 
 
 
 function validateObject(data,schema){   
+  var ansibleSchema;
   if (schema!=null){
 	ansibleSchema=require('./'+schema+'.json');
+  }
+  else{
+	ansibleSchema=require('./ansibleSchema.json');
   }
   var validate = validator(ansibleSchema);
   var valid = validate(data);    
