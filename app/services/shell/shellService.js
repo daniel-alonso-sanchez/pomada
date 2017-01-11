@@ -44,9 +44,7 @@ function checkTargets(machineList){
 			 throw new Error( 'Ip address not valid : '+ tokens[i] );
 		}
 	}
-	if (tokens.indexOf(',')==-1){
-		tokens=tokens+",";
-	}
+	machineList=machineList+",";
 	logger.debug("end checkTargets... ");
 	return machineList;
 }
