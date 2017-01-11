@@ -14,10 +14,12 @@ function runCommand(job,doneCallback){
   child.stdout.on('data', function(chunk) {
     // output will be here in chunks
     var textChunk = decoder.write(chunk);
-        job.log (textChunk);
+	logger.debug(textChunk);
+    job.log (textChunk);
   });
   child.stderr.on('data', function (chunk) {
-          var textChunk = decoder.write(chunk);		 
+          var textChunk = decoder.write(chunk);	
+		  logger.debug(textChunk);		  
           job.log (textChunk);
   });
   child.on('close', function (code) {        
@@ -41,6 +43,9 @@ function checkTargets(machineList){
 			 logger.error("Ip address not valid: " +tokens[i]);
 			 throw new Error( 'Ip address not valid : '+ tokens[i] );
 		}
+	}
+	if (tokens.indexOf(',')==-1){
+		tokens=tokens+",";
 	}
 	logger.debug("end checkTargets... ");
 	return machineList;
