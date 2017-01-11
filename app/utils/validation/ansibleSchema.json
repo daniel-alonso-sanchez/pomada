@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
- 
+  "additionalProperties":false,
   "type": "object",
   "properties": {
 	"title": {
@@ -15,7 +15,7 @@
 	"tags": {
 	  "type": "string"
 	},
-	"atts": {
+	"vars": {
 	  "$ref": "#/definitions/atts"         
 	}
   },
@@ -23,36 +23,9 @@
 	"title",
 	"to"	
   ],
-"definitions": {
-        "atts": {
-            "type": "object",
-            "patternProperties": {
-                ".*": {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "enum": [
-                                "Text",
-                                "Boolean",
-                                "Numeric",
-                                "DateTime"
-                            ],
-                            "readOnly": true
-                        },
-                        "isNullable": {
-                            "type": [
-                                "boolean",
-                                "null"
-                            ],
-                            "readOnly": true
-                        }
-                    }
-                }
-            }
+  "definitions": {
+        "vars": {
+            "type": "object"            
         }
     }
 }

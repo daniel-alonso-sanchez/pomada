@@ -27,9 +27,9 @@ ansibleQueue.process('ansible',function(job, done){
 });
 function validateJob(job) {
 
- if (!validation.validate(job.data)){
-    logger.error ('Job %d json metadata is not valid. Must match this json schema: %s',job.id,JSON.stringify(validation.jsonSchema));
-    throw new Error( 'Json request is not valid. Must match this json schema: '+JSON.stringify(validation.jsonSchema) );
+ if (!validation.validate(job.data,null)){
+    logger.error ('Job %d json metadata is not valid. Must match this json schema: %s',job.id,JSON.stringify(validation.getSchema(null)));
+    throw new Error( 'Json request is not valid. Must match this json schema: '+JSON.stringify(validation.getSchema(null)) );
  }
 }
 function runProvision(job, done) {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",  
-    "test": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "test": "set NODE_ENV=test && mocha --recursive --require co-mocha",
     "test-unit": "set NODE_ENV=test && mocha --recursive --require co-mocha"
     
   },

@@ -2,6 +2,7 @@ var logger = require('utils/logs/logger');
 var spawn = require('child_process').spawn;
 var config= require ('config');
 var StringDecoder = require('string_decoder').StringDecoder;
+var validation= require('utils/validation/jschemaValidation');
 var has = require('lodash.has');
 function runCommand(job,doneCallback){
   logger.debug("getting parameters... ");
@@ -57,11 +58,42 @@ function getParameters(job){
 	var parameters=['-i',checkTargets(job.data.to),getRule(job.data.rule)];
 	var hasProperty=has(job.data, 'tags');
 	logger.debug('hasProperty:'+hasProperty);
-	if (has(job.data, 'tags') && job.data.tags.length>0){		
+	if (hasProperty && job.data.tags.length>0){		
 		parameters=parameters.concat (['--tags',job.data.tags]);	
 	}
+	parameters=parameters.concat(getExtraVars(job));
 	logger.debug('parameters:'+parameters);
 	return parameters;
+}
+function getExtraVars(job){
+	var parameters=[];
+	var hasProperty=has(job.data, 'tags');
+	var extraVarsStr='';
+	if (hasProperty && job.data.tags.length>0){		
+		var tags=job.data.tags.split(',');
+		for (i=0;i<tags.length;i++){
+			var currentTag=tags[i];
+			var currentVarsStr=getExtraVarsForTag(job,currentTag);
+		}
+	}   
+}
+function getExtraVarsForTag(job,tag){	
+	var hasProperty=has(job.data, 'vars');
+	var extraVarsStr='';
+	if (hasProperty && job.data.vars.length>0){		
+		hasProperty=has(job.data.vars, tag);
+		if (hasProperty && job.data.vars[tag].length>0){		
+			/**ahora es cuando validamos el esquema de los datos suministrados**/
+			validateMetadata(job,tag);
+		}   
+	}   
+}
+function validateMetadata(job,tag) {
+
+ if (!validation.validate(job.data.vars[tag],tag)){
+    logger.error ('Job %d json metadata is not valid. Must match this json schema: %s',job.id,JSON.stringify(validation.getSchema(tag)));
+    throw new Error( 'Json request is not valid. Must match this json schema: '+JSON.stringify(validation.getSchema(tag)) );
+ }
 }
 module.exports = {
     run: runCommand

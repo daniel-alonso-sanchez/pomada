@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "unit_name": {
+      "type": "string"
+    },    
+    "bea_version": {
+      "type": "string"
+    },    
+    "datasources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "datasource": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "driver_name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "test_query": {
+                "type": "string"
+              },
+              "transaction_protocol": {
+                "type": "string"
+              },
+              "jndi_name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "targets",
+              "driver_name",
+              "url",
+              "user",
+              "password",
+              "test_query",
+              "transaction_protocol",
+              "jndi_name"
+            ]
+          }
+        },
+        "required": [
+          "datasource"
+        ]
+      }
+    }
+  },
+  "required": [
+    "unit_name",       
+    "datasources"
+  ]
+}
